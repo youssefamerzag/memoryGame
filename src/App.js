@@ -1,16 +1,24 @@
 import React, { useEffect, useRef, useState } from "react";
-
+import './App.css'
 const App = () => {
 
   const imgs = [
     {id : 0 , key : 0 , src : 'imgs/html.png' , disponible : true},
     {id : 1 , key : 1 , src : 'imgs/mongodb.png', disponible : true},
-    {id : 1 , key : 2 , src : 'imgs/nodejs.png', disponible : true},
+    {id : 2 , key : 2 , src : 'imgs/nodejs.png', disponible : true},
     {id : 3 , key : 3 , src : 'imgs/reactjs.png', disponible : true},
     {id : 0 , key : 4 , src : 'imgs/html.png', disponible : true},
     {id : 1 , key : 5 , src : 'imgs/mongodb.png', disponible : true},
     {id : 2 , key : 6 , src : 'imgs/nodejs.png', disponible : true},
     {id : 3 , key : 7 , src : 'imgs/reactjs.png', disponible : true},
+    {id : 4 , key : 8 , src : 'imgs/redux.png' , disponible : true},
+    {id : 5 , key : 9 , src : 'imgs/ruby.png', disponible : true},
+    {id : 6 , key : 10 , src : 'imgs/swift.png', disponible : true},
+    {id : 7 , key : 11, src : 'imgs/typescript.png', disponible : true},
+    {id : 4 , key : 12, src : 'imgs/redux.png', disponible : true},
+    {id : 5 , key : 13, src : 'imgs/ruby.png', disponible : true},
+    {id : 6 , key : 14, src : 'imgs/swift.png', disponible : true},
+    {id : 7 , key : 15, src : 'imgs/typescript.png', disponible : true},
   ]
 
   const [firstChoosingImg , setFirstChoosingImg] = useState()
@@ -23,24 +31,23 @@ const App = () => {
     if(selectedImg.disponible){
       if(firstChoosingImg === undefined){
         setFirstChoosingImg(selectedImg.id)
-        imgRef.current[imgKey].current.style.backgroundColor = 'lightblue';
+        imgRef.current[imgKey].current.style.filter = 'brightness(100%)';
       }else if (secondeChoosingImg === undefined){
         setsecondeChoosingImg(selectedImg.id)
+        imgRef.current[imgKey].current.style.filter = 'brightness(100%)';
       }
     }
   };
   
 
-  useEffect((imgKey) => {
+  useEffect(() => {
     if( firstChoosingImg !== undefined &&  secondeChoosingImg !== undefined ){
       if(firstChoosingImg === secondeChoosingImg ) {
-        alert('done')
-        imgRef.current[imgKey].current.style.backgroundColor = 'green';
         setFirstChoosingImg()
         setsecondeChoosingImg()
       }else if(firstChoosingImg != secondeChoosingImg || firstChoosingImg != firstChoosingImg) {
-        alert('false')
-        imgRef.current[imgKey].current.style.backgroundColor = 'null';
+        imgRef.current[firstChoosingImg].current.style.filter = 'brightness(0%)';
+        imgRef.current[secondeChoosingImg].current.style.filter = 'brightness(0%)';
         setFirstChoosingImg()
         setsecondeChoosingImg()
       }
@@ -48,10 +55,10 @@ const App = () => {
   },[firstChoosingImg, secondeChoosingImg])
 
   return(
-    <div>
-      <div>
+    <div className="App">
+      <div className="imgs">
         {imgs.map(img => 
-            <img ref={imgRef.current[img.key]} src={img.src} id={img.id} key={img.key} onClick={() => choose(img.key)} ></img>
+            <img className="img" ref={imgRef.current[img.key]} src={img.src} id={img.id} key={img.key} onClick={() => choose(img.key)} ></img>
           )}
       </div>
     </div>
