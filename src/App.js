@@ -21,6 +21,14 @@ const App = () => {
     {id : 7 , key : 15, src : 'imgs/typescript.png', disponible : true},
   ])
 
+  useEffect(() => {
+    for (let i = imgs.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [imgs[i], imgs[j]] = [imgs[j], imgs[i]];
+    }
+  }, []);
+
+
   const [firstChoosingImg , setFirstChoosingImg] = useState()
   const [secondeChoosingImg , setsecondeChoosingImg] = useState()
   const [firstImgKey , setFirstImgKey] = useState()
